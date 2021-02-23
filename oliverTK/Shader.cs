@@ -45,6 +45,11 @@ namespace oliverTK
             return shader;
         }
 
+        public int GetAttributeLocation(string attributeName)
+        {
+            return GL.GetAttribLocation(_handle, attributeName);
+        }
+
         private void DeleteShader(int shader)
         {
             GL.DetachShader(_handle, shader);
