@@ -6,7 +6,7 @@ namespace oliverTK
 {
     public class Shader : IDisposable
     {
-        private int _handle;
+        private readonly int _handle;
         
         public Shader(string vertexPath, string fragmentPath)
         {

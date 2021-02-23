@@ -10,7 +10,7 @@ namespace oliverTK
 {
     public class GayMe : GameWindow 
     {
-        float[] vertices = new []
+        private readonly float[] _vertices = new []
         {
             -0.5f, -0.5f,  0.0f,
             -0.5f,  0.5f,  0.0f,
@@ -35,7 +35,7 @@ namespace oliverTK
             base.OnLoad();
             GL.ClearColor(1.0f, 0.3f, 0.3f, 1.0f);
 
-            _vbo = new VertexBuffer(vertices);
+            _vbo = new VertexBuffer(_vertices);
             _vao = new VertexArray();
             _shader = new Shader("shader.vert", "shader.frag");
             
