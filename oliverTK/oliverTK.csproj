@@ -8,6 +8,7 @@
     <ItemGroup>
       <PackageReference Include="OpenTK" Version="4.5.0" />
       <PackageReference Include="OpenTK.Graphics" Version="4.5.0" />
+      <PackageReference Include="System.Drawing.Common" Version="6.0.0-preview.1.21102.12" />
     </ItemGroup>
 
     <ItemGroup>
@@ -15,6 +16,15 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="shader.vert">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="texShader.frag">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="texShader.vert">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="img.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
