@@ -66,6 +66,13 @@ namespace oliverTK
             GL.Uniform1(location, uniform);
         }
 
+        public void SetUniform(string name, int uniform)
+        {
+            Bind();
+            int location = GL.GetUniformLocation(_handle, name);
+            GL.Uniform1(location, uniform);
+        }
+
         private void DeleteShader(int shader)
         {
             GL.DetachShader(_handle, shader);
