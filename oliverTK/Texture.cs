@@ -29,8 +29,9 @@ namespace oliverTK
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
         }
 
-        public void Bind()
+        public void Bind(TextureUnit unit = TextureUnit.Texture0)
         {
+            GL.ActiveTexture(unit);
             GL.BindTexture(TextureTarget.Texture2D, _handle);
         }
 

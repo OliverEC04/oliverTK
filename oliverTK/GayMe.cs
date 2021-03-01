@@ -44,7 +44,8 @@ namespace oliverTK
         private ElementBuffer _ebo;
         private VertexArray _vao;
         private Shader _shader;
-        private Texture _texture;
+        private Texture _texture1;
+        private Texture _texture2;
         private readonly Stopwatch _stopwatch = new Stopwatch();
 
         public GayMe(int width, int height, string title)
@@ -62,13 +63,14 @@ namespace oliverTK
             _ebo = new ElementBuffer(_indices);
             _vao = new VertexArray();
             _shader = new Shader("texShader.vert", "texShader.frag");
-            _texture = new Texture("img.png");
+            _texture1 = new Texture("img.png");
+            _texture2 = new Texture("img2.png");
             
             _vao.SetVertexAttribute(_vbo, _shader.GetAttributeLocation("vPosition"), 3, 5, 0);
             //_vao.SetVertexAttribute(_vbo, _shader.GetAttributeLocation("vColor"), 3, 6, 3);
             _vao.SetVertexAttribute(_vbo, _shader.GetAttributeLocation("vTexCoords"), 2, 5, 3);
             _vao.SetEbo(_ebo);
-            
+
             _stopwatch.Start();
 
             Size = new Vector2i(2000, 1000);
@@ -95,9 +97,14 @@ namespace oliverTK
         private void Render()
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
-
+            
             _shader.Bind();
-            _texture.Bind();
+
+            _shader.SetUniform1("texture0", 0);
+            _shader.SetUniform1("texture1", 1);
+            
+            _texture1.Bind(TextureUnit.Texture0);
+            _texture2.Bind(TextureUnit.Texture1);
 
             // float red = (float) Math.Abs(Math.Cos(_stopwatch.ElapsedMilliseconds * .001));
             // float green = (float) Math.Abs(Math.Sin(_stopwatch.ElapsedMilliseconds * .001));
@@ -130,7 +137,8 @@ namespace oliverTK
             _ebo.Dispose();
             _vao.Dispose();
             _shader.Dispose();
-            _texture.Dispose();
+            _texture1.Dispose();
+            _texture2.Dispose();
         }
     }
 }
