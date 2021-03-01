@@ -1,5 +1,7 @@
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Timers;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -12,13 +14,13 @@ namespace oliverTK
     {
         private readonly float[] _vertices = new []
         {
-             0.0f,  0.0f,  0.0f,
-            -0.4f, -0.5f,  0.0f,
-            -0.5f,  0.0f,  0.0f,
-            -0.4f,  0.5f,  0.0f,
-             0.4f,  0.5f,  0.0f,
-             0.5f,  0.0f,  0.0f,
-             0.4f, -0.5f,  0.0f,
+             0.0f,  0.0f,  0.0f,   1.0f, 0.2f,
+            -0.4f, -0.5f,  0.0f,   0.9f, 0.2f,
+            -0.5f,  0.0f,  0.0f,   0.3f, 0.8f,
+            -0.4f,  0.5f,  0.0f,   0.3f, 0.8f,
+             0.4f,  0.5f,  0.0f,   0.3f, 0.1f,
+             0.5f,  0.0f,  0.0f,   0.4f, 0.8f,
+             0.4f, -0.5f,  0.0f,   0.3f, 0.2f,
         };
 
         private readonly uint[] _indices = new uint[]
@@ -31,10 +33,19 @@ namespace oliverTK
             0, 6, 1,
         };
 
+        private readonly float[] _texCoords = new[]
+        {
+            0.0f, 0.0f,
+            1.0f, 0.0f,
+            1.0f, 1.0f,
+        };
+
         private VertexBuffer _vbo;
         private ElementBuffer _ebo;
         private VertexArray _vao;
         private Shader _shader;
+        private Texture _texture;
+        private readonly Stopwatch _stopwatch = new Stopwatch();
 
         public GayMe(int width, int height, string title)
             : base(GameWindowSettings.Default, NativeWindowSettings.Default)
@@ -50,10 +61,15 @@ namespace oliverTK
             _vbo = new VertexBuffer(_vertices);
             _ebo = new ElementBuffer(_indices);
             _vao = new VertexArray();
-            _shader = new Shader("shader.vert", "shader.frag");
+            _shader = new Shader("texShader.vert", "texShader.frag");
+            _texture = new Texture("img.png");
             
-            _vao.SetVertexAttribute(_vbo, _shader.GetAttributeLocation("vPosition"), 3, 0);
+            _vao.SetVertexAttribute(_vbo, _shader.GetAttributeLocation("vPosition"), 3, 5, 0);
+            //_vao.SetVertexAttribute(_vbo, _shader.GetAttributeLocation("vColor"), 3, 6, 3);
+            _vao.SetVertexAttribute(_vbo, _shader.GetAttributeLocation("vTexCoords"), 2, 5, 3);
             _vao.SetEbo(_ebo);
+            
+            _stopwatch.Start();
 
             Size = new Vector2i(2000, 1000);
         }
@@ -81,10 +97,20 @@ namespace oliverTK
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             _shader.Bind();
+            _texture.Bind();
+
+            // float red = (float) Math.Abs(Math.Cos(_stopwatch.ElapsedMilliseconds * .001));
+            // float green = (float) Math.Abs(Math.Sin(_stopwatch.ElapsedMilliseconds * .001));
+            // float blue = (float) Math.Abs(Math.Tan(_stopwatch.ElapsedMilliseconds * .001));
+            // _shader.SetUniform3("uColor", new Vector3(red, green, blue));
+
+            // _shader.SetUniform1("uScale",
+                // (float)Math.Abs(Math.Tan(_stopwatch.ElapsedMilliseconds * .0001)));
+            
             _vao.Bind();
             GL.DrawElements(PrimitiveType.Triangles, _indices.Length,
                 DrawElementsType.UnsignedInt, 0);
-
+            
             Context.SwapBuffers();
         }
 
@@ -104,6 +130,7 @@ namespace oliverTK
             _ebo.Dispose();
             _vao.Dispose();
             _shader.Dispose();
+            _texture.Dispose();
         }
     }
 }

@@ -1,17 +1,19 @@
 using System;
 using System.IO;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace oliverTK
 {
     public class Shader : IDisposable
     {
         private readonly int _handle;
+        private readonly int _vColorLocation;
         
         public Shader(string vertexPath, string fragmentPath)
         {
             _handle = GL.CreateProgram();
-            
+
             int vertexShader = CreateShader(ShaderType.VertexShader, vertexPath);
             int fragmentShader = CreateShader(ShaderType.FragmentShader, fragmentPath);
             
@@ -48,6 +50,20 @@ namespace oliverTK
         public int GetAttributeLocation(string attributeName)
         {
             return GL.GetAttribLocation(_handle, attributeName);
+        }
+
+        public void SetUniform3(string name, Vector3 uniform)
+        {
+            Bind();
+            int location = GL.GetUniformLocation(_handle, name);
+            GL.Uniform3(location, uniform);
+        }
+        
+        public void SetUniform1(string name, float uniform)
+        {
+            Bind();
+            int location = GL.GetUniformLocation(_handle, name);
+            GL.Uniform1(location, uniform);
         }
 
         private void DeleteShader(int shader)

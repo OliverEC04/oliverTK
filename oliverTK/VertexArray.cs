@@ -27,6 +27,7 @@ namespace oliverTK
             VertexBuffer vertexBuffer,
             int location,
             int count,
+            int vertexSize,
             int offset)
         {
             Bind();
@@ -34,9 +35,10 @@ namespace oliverTK
             
             GL.EnableVertexAttribArray(location);
             GL.VertexAttribPointer(location,
-                count, VertexAttribPointerType.Float,
+                count, 
+                VertexAttribPointerType.Float,
                 false,
-                count * sizeof(float),
+                vertexSize * sizeof(float),
                 offset * sizeof(float));
         }
 
