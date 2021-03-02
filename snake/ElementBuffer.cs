@@ -1,7 +1,7 @@
 using System;
 using OpenTK.Graphics.OpenGL4;
 
-namespace oliverTK
+namespace snake
 {
     public class ElementBuffer : IDisposable
     {

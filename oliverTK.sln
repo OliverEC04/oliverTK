@@ -7,6 +7,8 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "snake", "snake\snake.csproj", "{E4EECF5C-4E8D-4876-9569-DD50D136DFAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +19,9 @@ Global
 		{7897C4D6-0C61-473C-BB98-CF355C763335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7897C4D6-0C61-473C-BB98-CF355C763335}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7897C4D6-0C61-473C-BB98-CF355C763335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4EECF5C-4E8D-4876-9569-DD50D136DFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4EECF5C-4E8D-4876-9569-DD50D136DFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4EECF5C-4E8D-4876-9569-DD50D136DFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4EECF5C-4E8D-4876-9569-DD50D136DFAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
