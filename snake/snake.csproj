@@ -11,4 +11,19 @@
       <PackageReference Include="System.Drawing.Common" Version="6.0.0-preview.1.21102.12" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="texShader.frag">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="texShader.vert">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="tile.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="xp.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

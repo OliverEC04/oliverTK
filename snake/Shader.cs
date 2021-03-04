@@ -52,26 +52,46 @@ namespace snake
             return GL.GetAttribLocation(_handle, attributeName);
         }
 
-        public void SetUniform3(string name, Vector3 uniform)
+        public int GetUniformLocation(string name)
         {
-            Bind();
-            int location = GL.GetUniformLocation(_handle, name);
-            GL.Uniform3(location, uniform);
-        }
-        
-        public void SetUniform1(string name, float uniform)
-        {
-            Bind();
-            int location = GL.GetUniformLocation(_handle, name);
-            GL.Uniform1(location, uniform);
+            return GL.GetUniformLocation(_handle, name);
         }
 
-        public void SetUniform(string name, int uniform)
-        {
-            Bind();
-            int location = GL.GetUniformLocation(_handle, name);
-            GL.Uniform1(location, uniform);
-        }
+        public void SetUniform(int location, int value) =>
+            SetUniform(location, ref value);
+        public void SetUniform(int location, ref int value) =>
+            GL.ProgramUniform1(_handle, location, 1, ref value);
+        
+        public void SetUniform(int location, float value) =>
+            SetUniform(location, ref value);
+        public void SetUniform(int location, ref float value) =>
+            GL.ProgramUniform1(_handle, location, 1, ref value);
+        
+        public void SetUniform(int location, double value) =>
+            SetUniform(location, ref value);
+        public void SetUniform(int location, ref double value) =>
+            GL.ProgramUniform1(_handle, location, 1, ref value);
+        
+        public void SetUniform(int location, Vector2 value) =>
+            SetUniform(location, ref value);
+        public void SetUniform(int location, ref Vector2 value) =>
+            GL.ProgramUniform2(_handle, location, 1, ref value.X);
+        
+        public void SetUniform(int location, Vector3 value) =>
+            SetUniform(location, ref value);
+        public void SetUniform(int location, ref Vector3 value) =>
+            GL.ProgramUniform3(_handle, location, 1, ref value.X);
+        
+        public void SetUniform(int location, Vector4 value) =>
+            SetUniform(location, ref value);
+        public void SetUniform(int location, ref Vector4 value) =>
+            GL.ProgramUniform4(_handle, location, 1, ref value.X);
+        
+        
+        public void SetUniform(int location, Matrix4 value) =>
+            SetUniform(location, ref value);
+        public void SetUniform(int location, ref Matrix4 value) =>
+            GL.ProgramUniformMatrix4(_handle, location, 1, false, ref value.Row0.X);
 
         private void DeleteShader(int shader)
         {
