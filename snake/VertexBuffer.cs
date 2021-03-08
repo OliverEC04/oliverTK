@@ -1,28 +1,27 @@
 using System;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 
 namespace snake
 {
     public class VertexBuffer : IDisposable
     {
-        private readonly int _handle;
+        private uint _handle;
 
         public VertexBuffer(float[] vertices)
         {
-            _handle = GL.GenBuffer();
+            _handle = GL.GenBuffers();
             Bind();
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices,
-                BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTargetARB.ArrayBuffer, vertices, BufferUsageARB.StaticDraw);
         }
 
         public void Bind()
         {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _handle);
+            GL.BindBuffer(BufferTargetARB.ArrayBuffer, _handle);
         }
 
         public void Dispose()
         {
-            GL.DeleteBuffer(_handle);
+            GL.DeleteBuffers(1, ref _handle);
         }
     }
 }

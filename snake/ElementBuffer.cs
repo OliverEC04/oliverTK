@@ -1,33 +1,33 @@
 using System;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 
 namespace snake
 {
     public class ElementBuffer : IDisposable
     {
-        private readonly int _handle;
+        private readonly uint _handle;
         
         public ElementBuffer(uint[] indices)
         {
-            _handle = GL.GenBuffer();
+            _handle = GL.GenBuffers();
             Bind();
-            GL.BufferData(BufferTarget.ElementArrayBuffer, indices.Length * sizeof(uint), indices, 
-                BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTargetARB.ElementArrayBuffer, indices, 
+                BufferUsageARB.StaticDraw);
         }
 
         public void Bind()
         {
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _handle);
+            GL.BindBuffer(BufferTargetARB.ElementArrayBuffer, _handle);
         }
 
         public void Unbind()
         {
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
+            GL.BindBuffer(BufferTargetARB.ElementArrayBuffer, 0);
         }
         
-        public void Dispose()
+        public unsafe void Dispose()
         {
-            GL.DeleteBuffer(_handle);
+            GL.DeleteBuffers(1, (uint*) _handle);
         }
     }
 }

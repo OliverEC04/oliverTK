@@ -1,15 +1,15 @@
 using System;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 
 namespace snake
 {
     public class VertexArray : IDisposable
     {
-        private readonly int _handle;
+        private uint _handle;
         
         public VertexArray()
         {
-            _handle = GL.GenVertexArray();
+            _handle = GL.GenVertexArrays();
         }
 
         public void Bind()
@@ -23,9 +23,9 @@ namespace snake
             ebo.Bind();
         }
 
-        public void SetVertexAttribute(
+        public unsafe void SetVertexAttribute(
             VertexBuffer vertexBuffer,
-            int location,
+            uint location,
             int count,
             int vertexSize,
             int offset)
@@ -37,14 +37,14 @@ namespace snake
             GL.VertexAttribPointer(location,
                 count, 
                 VertexAttribPointerType.Float,
-                false,
+                0,
                 vertexSize * sizeof(float),
-                offset * sizeof(float));
+                (void *) (offset * sizeof(float)));
         }
 
         public void Dispose()
         {
-            GL.DeleteVertexArray(_handle);
+            GL.DeleteVertexArrays(1, ref _handle);
         }
     }
 }

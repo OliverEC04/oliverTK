@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Timers;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
@@ -13,6 +13,7 @@ namespace snake
     public class Game : GameWindow
     {
         private Board _board;
+        private Snake _snake;
         private Fruit _fruit;
         
         public Game(int width, int height, string title)
@@ -26,8 +27,9 @@ namespace snake
             base.OnLoad();
             GL.ClearColor(1.0f, 0.3f, 0.3f, 1.0f);
 
-            _board = new Board(new Vector2i(2, 2), new Vector2i(15, 15), new Texture("tile.png"));
-            _fruit = new Fruit(new Vector2(0.5f, 0.5f), new Vector2(0.75f, 0.75f), new Texture("xp.png"));
+            _board = new Board(Size, new Vector2i(15, 15));
+            _snake = new Snake(_board.Size);
+            // _fruit = new Fruit(new Vector2(0.5f, 0.5f), new Vector2(0.75f, 0.75f), new Texture("xp.png"));
             
             Size = new Vector2i(2000, 1000);
         }
@@ -54,7 +56,9 @@ namespace snake
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            _fruit.Render();
+            _board.Render();
+            _snake.Render();
+            // _fruit.Render();
             
             Context.SwapBuffers();
         }
@@ -65,6 +69,7 @@ namespace snake
             
             GL.Viewport(0, 0, Size.X, Size.Y);
             Render();
+            _board.OnResize(Size);
         }
 
         protected override void OnUnload()

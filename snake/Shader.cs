@@ -1,27 +1,30 @@
 using System;
 using System.IO;
-using OpenTK.Graphics.OpenGL4;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 
 namespace snake
 {
     public class Shader : IDisposable
     {
-        private readonly int _handle;
+        private uint _handle;
         private readonly int _vColorLocation;
         
         public Shader(string vertexPath, string fragmentPath)
         {
             _handle = GL.CreateProgram();
 
-            int vertexShader = CreateShader(ShaderType.VertexShader, vertexPath);
-            int fragmentShader = CreateShader(ShaderType.FragmentShader, fragmentPath);
+            uint vertexShader = CreateShader(ShaderType.VertexShader, vertexPath);
+            uint fragmentShader = CreateShader(ShaderType.FragmentShader, fragmentPath);
             
             GL.LinkProgram(_handle);
 
-            string infoLog = GL.GetProgramInfoLog(_handle);
-            if (!string.IsNullOrEmpty(infoLog))
+            int infoLogLength = 0;
+            GL.GetProgramiv(_handle, ProgramPropertyARB.InfoLogLength, ref infoLogLength);
+            if (infoLogLength != 0)
             {
+                int tmp = 0;
+                string infoLog = GL.GetProgramInfoLog(_handle, infoLogLength, ref tmp);
                 throw new Exception(infoLog);
             }
             
@@ -29,16 +32,19 @@ namespace snake
             DeleteShader(fragmentShader);
         }
 
-        private int CreateShader(ShaderType shaderType, string path)
+        private uint CreateShader(ShaderType shaderType, string path)
         {
             string src = File.ReadAllText(path);
-            int shader = GL.CreateShader(shaderType);
+            uint shader = GL.CreateShader(shaderType);
             GL.ShaderSource(shader, src);
             GL.CompileShader(shader);
 
-            string infoLog = GL.GetShaderInfoLog(shader);
-            if (!string.IsNullOrEmpty(infoLog))
+            int infoLogLength = 0;
+            GL.GetProgramiv(shader, ProgramPropertyARB.InfoLogLength, ref infoLogLength);
+            if (infoLogLength != 0)
             {
+                int tmp = 0;
+                string infoLog = GL.GetProgramInfoLog(shader, infoLogLength, ref tmp);
                 throw new Exception(infoLog);
             }
             
@@ -60,40 +66,40 @@ namespace snake
         public void SetUniform(int location, int value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref int value) =>
-            GL.ProgramUniform1(_handle, location, 1, ref value);
+            GL.ProgramUniform1i(_handle, location, value);
         
         public void SetUniform(int location, float value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref float value) =>
-            GL.ProgramUniform1(_handle, location, 1, ref value);
+            GL.ProgramUniform1f(_handle, location, value);
         
         public void SetUniform(int location, double value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref double value) =>
-            GL.ProgramUniform1(_handle, location, 1, ref value);
+            GL.ProgramUniform1d(_handle, location, value);
         
         public void SetUniform(int location, Vector2 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Vector2 value) =>
-            GL.ProgramUniform2(_handle, location, 1, ref value.X);
+            GL.ProgramUniform2fv(_handle, location, 1, ref value.X);
         
         public void SetUniform(int location, Vector3 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Vector3 value) =>
-            GL.ProgramUniform3(_handle, location, 1, ref value.X);
+            GL.ProgramUniform3fv(_handle, location, 1, ref value.X);
         
         public void SetUniform(int location, Vector4 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Vector4 value) =>
-            GL.ProgramUniform4(_handle, location, 1, ref value.X);
+            GL.ProgramUniform4fv(_handle, location, 1, ref value.X);
         
         
         public void SetUniform(int location, Matrix4 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Matrix4 value) =>
-            GL.ProgramUniformMatrix4(_handle, location, 1, false, ref value.Row0.X);
+            GL.ProgramUniformMatrix4fv(_handle, location, 1, 0, ref value.Row0.X);
 
-        private void DeleteShader(int shader)
+        private void DeleteShader(uint shader)
         {
             GL.DetachShader(_handle, shader);
             GL.DeleteShader(shader);

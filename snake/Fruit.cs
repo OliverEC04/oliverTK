@@ -1,5 +1,4 @@
 using System.Numerics;
-using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using Vector2 = OpenTK.Mathematics.Vector2;
 
