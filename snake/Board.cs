@@ -5,14 +5,15 @@ namespace snake
 {
     public class Board
     {
-        public Vector2i Size;
+        public Vector2i GridSize;
+        public Vector2 Size;
         private Rect _rect;
         
-        public Board(Vector2i screenSize, Vector2i size)
+        public Board(Vector2i screenSize, Vector2i gridSize)
         {
-            Size = size;
+            GridSize = gridSize;
             _rect = new Rect(new Vector2(0.5f, 0.5f), new Vector2(1.0f, 1.0f),
-                new Texture("4tile.png"), (Vector2)size / 2);
+                new Texture("4tile.png"), (Vector2)gridSize / 2);
             
             OnResize(screenSize);
         }

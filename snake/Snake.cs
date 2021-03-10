@@ -6,10 +6,14 @@ namespace snake
     public class Snake
     {
         private List<Square> _body = new List<Square>();
+        private Square test;
         
         public Snake(Vector2i boardSize)
         {
             Texture bodyTexture = new Texture("shit.jpg");
+            
+            // test = new Square(boardSize, new Vector2i(1, 1),
+            //     bodyTexture);
             
             for (int i = 0; i < 5; i++)
             {

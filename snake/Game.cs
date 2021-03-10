@@ -28,7 +28,7 @@ namespace snake
             GL.ClearColor(1.0f, 0.3f, 0.3f, 1.0f);
 
             _board = new Board(Size, new Vector2i(15, 15));
-            _snake = new Snake(_board.Size);
+            _snake = new Snake(_board.GridSize);
             // _fruit = new Fruit(new Vector2(0.5f, 0.5f), new Vector2(0.75f, 0.75f), new Texture("xp.png"));
             
             Size = new Vector2i(2000, 1000);
