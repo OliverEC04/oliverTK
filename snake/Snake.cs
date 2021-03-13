@@ -17,8 +17,8 @@ namespace snake
         public Snake(Vector2 boardSize, Vector2i boardGridSize)
         {
             _boardGridSize = boardGridSize;
-            Texture bodyTexture = new Texture("restart.png");
-            Texture headTexture = new Texture("turnOff.png");
+            Texture bodyTexture = new Texture("assets/restart.png");
+            Texture headTexture = new Texture("assets/turnOff.png");
 
             for (int i = 0; i < 5; i++)
             {

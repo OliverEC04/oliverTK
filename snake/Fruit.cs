@@ -13,7 +13,7 @@ namespace snake
         {
             Random random = new Random();
             int texNum = random.Next(0, 1);
-            Texture texture = new Texture("4tile.png");
+            Texture texture = new Texture("assets/4tile.png");
             
             switch (texNum)
             {
@@ -21,7 +21,7 @@ namespace snake
                     break;
                 
                 case 1:
-                    texture = new Texture("shit.jpg");
+                    texture = new Texture("assets/shit.jpg");
                     break;
             }
             

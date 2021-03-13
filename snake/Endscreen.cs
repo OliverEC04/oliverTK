@@ -8,7 +8,8 @@ namespace snake
         
         public Endscreen()
         {
-            _rect = new Rect(new Vector2(0.5f, 0.5f), new Vector2(1, 1), new Texture("shutdown.jpg"));
+            _rect = new Rect(new Vector2(0.5f, 0.5f), new Vector2(1, 1),
+                new Texture("assets/shutdown.jpg"));
         }
 
         public void Render()
