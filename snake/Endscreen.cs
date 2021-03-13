@@ -15,10 +15,5 @@ namespace snake
         {
             _rect.Render();
         }
-
-        public void OnResize()
-        {
-            
-        }
     }
 }
