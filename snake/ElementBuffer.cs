@@ -9,7 +9,7 @@ namespace snake
         
         public ElementBuffer(uint[] indices)
         {
-            _handle = GL.GenBuffers();
+            _handle = GL.GenBuffer();
             Bind();
             GL.BufferData(BufferTargetARB.ElementArrayBuffer, indices, 
                 BufferUsageARB.StaticDraw);

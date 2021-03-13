@@ -81,23 +81,23 @@ namespace snake
         public void SetUniform(int location, Vector2 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Vector2 value) =>
-            GL.ProgramUniform2fv(_handle, location, 1, ref value.X);
+            GL.ProgramUniform2fv(_handle, location, 1, value.X);
         
         public void SetUniform(int location, Vector3 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Vector3 value) =>
-            GL.ProgramUniform3fv(_handle, location, 1, ref value.X);
+            GL.ProgramUniform3fv(_handle, location, 1, value.X);
         
         public void SetUniform(int location, Vector4 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Vector4 value) =>
-            GL.ProgramUniform4fv(_handle, location, 1, ref value.X);
+            GL.ProgramUniform4fv(_handle, location, 1, value.X);
         
         
         public void SetUniform(int location, Matrix4 value) =>
             SetUniform(location, ref value);
         public void SetUniform(int location, ref Matrix4 value) =>
-            GL.ProgramUniformMatrix4fv(_handle, location, 1, 0, ref value.Row0.X);
+            GL.ProgramUniformMatrix4fv(_handle, location, 1, false, value.Row0.X);
 
         private void DeleteShader(uint shader)
         {

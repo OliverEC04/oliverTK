@@ -9,7 +9,7 @@ namespace snake
 
         public VertexBuffer(float[] vertices)
         {
-            _handle = GL.GenBuffers();
+            _handle = GL.GenBuffer();
             Bind();
             GL.BufferData(BufferTargetARB.ArrayBuffer, vertices, BufferUsageARB.StaticDraw);
         }
@@ -21,7 +21,7 @@ namespace snake
 
         public void Dispose()
         {
-            GL.DeleteBuffers(1, ref _handle);
+            GL.DeleteBuffers(1, _handle);
         }
     }
 }

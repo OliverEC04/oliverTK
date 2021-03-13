@@ -9,7 +9,7 @@ namespace snake
         
         public VertexArray()
         {
-            _handle = GL.GenVertexArrays();
+            _handle = GL.GenVertexArray();
         }
 
         public void Bind()
@@ -37,14 +37,14 @@ namespace snake
             GL.VertexAttribPointer(location,
                 count, 
                 VertexAttribPointerType.Float,
-                0,
+                false,
                 vertexSize * sizeof(float),
                 (void *) (offset * sizeof(float)));
         }
 
         public void Dispose()
         {
-            GL.DeleteVertexArrays(1, ref _handle);
+            GL.DeleteVertexArrays(1, _handle);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace snake
         
         public unsafe Texture(string texturePath)
         {
-            _handle = GL.GenTextures();
+            _handle = GL.GenTexture();
             Bitmap bitmap = new Bitmap(texturePath);
             BitmapData data = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -42,7 +42,7 @@ namespace snake
 
         public void Dispose()
         {
-            GL.DeleteTextures(1, ref _handle);
+            GL.DeleteTextures(1, _handle);
         }
     }
 }

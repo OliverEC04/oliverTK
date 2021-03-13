@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="OpenTK" Version="5.0.0-pre.1" />
+      <PackageReference Include="OpenTK" Version="5.0.0-pre.2" />
       <PackageReference Include="System.Drawing.Common" Version="6.0.0-preview.1.21102.12" />
     </ItemGroup>
 
