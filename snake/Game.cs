@@ -18,6 +18,7 @@ namespace snake
         private Snake _snake;
         private Fruit _fruit;
         private Endscreen _endscreen;
+        private Random _random = new Random();
         private List<Keys> _keyLock = new List<Keys>();
         
         public Game(int width, int height, string title)
@@ -33,7 +34,8 @@ namespace snake
 
             _board = new Board(Size, new Vector2i(15, 15));
             _snake = new Snake(_board.Rect.Size, _board.GridSize);
-            // _fruit = new Fruit(new Vector2(0.5f, 0.5f), new Vector2(0.75f, 0.75f), new Texture("xp.png"));
+            _fruit = new Fruit(_board.Rect.Size, _board.GridSize,
+                new Vector2i(_random.Next(0, _board.GridSize.X), _random.Next(0, _board.GridSize.Y)));
             _endscreen = new Endscreen();
             
             Size = new Vector2i(2000, 1000);
@@ -120,7 +122,7 @@ namespace snake
             {
                 _board.Render();
                 _snake.Render();
-                // _fruit.Render();
+                _fruit.Render();
             }
             else
             {
@@ -133,6 +135,8 @@ namespace snake
         private void Reset()
         {
             _snake = new Snake(_board.Rect.Size, _board.GridSize);
+            _fruit = new Fruit(_board.Rect.Size, _board.GridSize,
+                new Vector2i(_random.Next(0, _board.GridSize.X), _random.Next(0, _board.GridSize.Y)));
         }
 
         protected override void OnResize(ResizeEventArgs e)
@@ -143,6 +147,7 @@ namespace snake
             Render();
             _board.OnResize(Size);
             _snake.OnResize(_board.Rect.Size);
+            _fruit.OnResize(_board.Rect.Size);
         }
 
         protected override void OnUnload()

@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using OpenTK.Mathematics;
 using Vector2 = OpenTK.Mathematics.Vector2;
@@ -6,15 +7,35 @@ namespace snake
 {
     public class Fruit
     {
-        private Rect _rect;
-        public Fruit(Vector2 position, Vector2 size, Texture texture)
+        private Square _square;
+        
+        public Fruit(Vector2 boardSize, Vector2i boardGridSize, Vector2i gridPosition)
         {
-            _rect = new Rect(position, size, texture);
+            Random random = new Random();
+            int texNum = random.Next(0, 1);
+            Texture texture = new Texture("4tile.png");
+            
+            switch (texNum)
+            {
+                case 0:
+                    break;
+                
+                case 1:
+                    texture = new Texture("shit.jpg");
+                    break;
+            }
+            
+            _square = new Square(boardSize, boardGridSize, gridPosition, texture);
         }
 
         public void Render()
         {
-            _rect.Render();
+            _square.Render();
+        }
+
+        public void OnResize(Vector2 boardSize)
+        {
+            _square.OnResize(boardSize);
         }
     }
 }
