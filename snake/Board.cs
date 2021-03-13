@@ -12,7 +12,7 @@ namespace snake
         {
             GridSize = gridSize;
             Rect = new Rect(new Vector2(0.5f, 0.5f), new Vector2(1.0f, 1.0f),
-                new Texture("4tile.png"), (Vector2)GridSize / 2);
+                new Texture("xp4tile.png"), (Vector2)GridSize / 2);
             
             OnResize(screenSize);
         }

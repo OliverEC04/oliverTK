@@ -30,6 +30,18 @@
       <None Update="4tile.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="shutdown.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="xp4tile.jpg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="xp4tile.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="restart.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

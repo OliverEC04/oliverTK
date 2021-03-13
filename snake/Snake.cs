@@ -8,13 +8,14 @@ namespace snake
     public class Snake
     {
         public Direction Direction = Direction.Up;
+        public bool IsAlive = true;
         private int _tick;
         private List<Square> _body = new List<Square>();
         private List<Vector2i> _gridPositions = new List<Vector2i>();
         
         public Snake(Vector2 boardSize, Vector2i boardGridSize)
         {
-            Texture bodyTexture = new Texture("shit.jpg");
+            Texture bodyTexture = new Texture("restart.png");
 
             for (int i = 0; i < 5; i++)
             {
@@ -49,6 +50,14 @@ namespace snake
                 for (int i = 0; i < _body.Count; i++)
                 {
                     _body[i].GridPosition = _gridPositions[i];
+                }
+
+                for (int i = 1; i < _body.Count; i++)
+                {
+                    if (_body[0].GridPosition == _body[i].GridPosition)
+                    {
+                        IsAlive = false;
+                    }
                 }
             }
 
