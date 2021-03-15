@@ -33,9 +33,9 @@ namespace snake
             GL.ClearColor(1.0f, 0.3f, 0.3f, 1.0f);
 
             _board = new Board(Size, new Vector2i(15, 15));
-            _snake = new Snake(_board.Rect.Size, _board.GridSize);
             _fruit = new Fruit(_board.Rect.Size, _board.GridSize,
                 new Vector2i(_random.Next(0, _board.GridSize.X), _random.Next(0, _board.GridSize.Y)));
+            _snake = new Snake(_board.Rect.Size, _board.GridSize, _fruit);
             _endscreen = new Endscreen();
             
             Size = new Vector2i(2000, 1000);
@@ -128,15 +128,15 @@ namespace snake
             {
                 _endscreen.Render();
             }
-            
+
             Context.SwapBuffers();
         }
 
         private void Reset()
         {
-            _snake = new Snake(_board.Rect.Size, _board.GridSize);
             _fruit = new Fruit(_board.Rect.Size, _board.GridSize,
                 new Vector2i(_random.Next(0, _board.GridSize.X), _random.Next(0, _board.GridSize.Y)));
+            _snake = new Snake(_board.Rect.Size, _board.GridSize, _fruit);
         }
 
         protected override void OnResize(ResizeEventArgs e)

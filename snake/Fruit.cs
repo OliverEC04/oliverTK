@@ -7,12 +7,14 @@ namespace snake
 {
     public class Fruit
     {
-        private Square _square;
+        public Square Square;
+        private Vector2i _boardGridSize;
+        private Random _random = new Random();
         
         public Fruit(Vector2 boardSize, Vector2i boardGridSize, Vector2i gridPosition)
         {
-            Random random = new Random();
-            int texNum = random.Next(0, 1);
+            _boardGridSize = boardGridSize;
+            int texNum = _random.Next(0, 1);
             Texture texture = new Texture("assets/4tile.png");
             
             switch (texNum)
@@ -25,17 +27,23 @@ namespace snake
                     break;
             }
             
-            _square = new Square(boardSize, boardGridSize, gridPosition, texture);
+            Square = new Square(boardSize, boardGridSize, gridPosition, texture);
         }
 
         public void Render()
         {
-            _square.Render();
+            Square.Render();
         }
 
         public void OnResize(Vector2 boardSize)
         {
-            _square.OnResize(boardSize);
+            Square.OnResize(boardSize);
+        }
+
+        public void Eat()
+        {
+            Square.GridPosition = new Vector2i(_random.Next(0, _boardGridSize.X),
+                _random.Next(0, _boardGridSize.Y));
         }
     }
 }
